@@ -7,12 +7,12 @@ header("Access-Control-Allow-Headers: *");
 require("config.php");
 
 
+$request = json_decode(file_get_contents("php://input"), true);
 
-$postdata = file_get_contents("php://input");
-if(isset($postdata) && !empty($postdata)){
-    $request = json_decode($postdata, true);
-    $username = $request->username;
-    $password = $request->password;
+if(isset($request) && !empty($request)){
+
+    $username = $request["username"];
+    $password = $request["password"];
   
 
     if(empty($username) && empty($password)) die();
@@ -20,7 +20,7 @@ if(isset($postdata) && !empty($postdata)){
     $query = "SELECT * FROM users WHERE username = '$username'";
     $result = mysqli_query($db,$query);
 
-    if(mysqli_num_rows($result) == 1){
+    if(mysqli_num_rows($result) >= 1){
         $row = mysqli_fetch_assoc($result);
         echo json_encode(["login" => true, "message" => "Trovato risultato in db con nome " . $row["username"]]);
     } else {
@@ -28,7 +28,7 @@ if(isset($postdata) && !empty($postdata)){
     }
 
 } else {
-    echo json_encode("Non sono arrivati i dati che hai inviato");
+    echo json_encode(["message" => "Non sono arrivati i dati che hai inviato"]);
 }
 
 

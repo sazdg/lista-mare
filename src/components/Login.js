@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import axios from 'axios';
 import '../App.css';
+import Dashboard from '../screen/Dashboard';
+import { useLocation, Navigate } from 'react-router-dom';
 
 
 class Login extends Component {
@@ -11,50 +13,53 @@ class Login extends Component {
         this.state = {
             username: "",
             password: "",
-            sent: false,
             error: null
         };
     }
 
     //form submit handler method
-    // tryLogin(event){
-    //     event.preventDefault();
-    //     console.log(this.state);
-    //     axios({
-    //         method: 'post',
-    //         url: 'http://localhost:3000/api-server/api/index.php',
-    //         headers: {'content-type':'application/json'},
-    //         data: this.state
-    //     })
-    //     .then(result => {
-    //         this.setState({
-    //             sent: result.data.sent
-    //         })
-    //     })
-    //     .catch(error => this.setState({ error: error.message}));
-    // }
-
-    tryLogin(event) {
+    tryLogin(event){
         event.preventDefault();
-        console.log(this.state);
-
-        axios.get('http://localhost:3000/api/index.php')
-            .then((res) => {
-                console.log(res.data)
-            })
-            .catch((error) => {
-                console.log(error)
-            });
-
+        
+        axios({
+            method: 'post',
+            url: 'http://localhost/lista-mare/api/login.php',
+            headers: {'content-type':'application/json'},
+            data: this.state
+        })
+        .then(response => {
+            console.log(response.data)
+            if (response.data.login) {
+               //<Navigate to="/dashboard" replace={true} />
+               //TODO redirect a pagina dashboard
+            } else {
+               //TODO appare P con messaggio e reload page per cambiare credenziali
+            }
+        })
+        .catch(error => this.setState({ error: error.message}));
     }
 
+/*
+    tryLogin(event) {
+        console.log("click trylogin")
+        event.preventDefault()
+        
+        axios.post("http://localhost/lista-mare/api/login.php", this.state)
+            .then((response) => {
+                console.log(response.data)
+            })
+            .catch(error => {
+                alert(error.message)
+            })
+
+    }
+*/
     //how to send data from react to php api
     //install axios using npm, it works well with http requests
 
 
     render() {
-        //const for api path
-        //const PATH = "http://localhost/api-server/api/index.php";
+
         return (
 
             <div>
@@ -72,8 +77,11 @@ class Login extends Component {
                         required />
                     <br />
                     <input type="submit" id="send" value="Send it!!"
-                        onClick={e => this.tryLogin(e)} />
+                        onClick={(e) => this.tryLogin(e)} />
+                    
                 </form>
+                
+                <p className="error">{this.state.error}</p>
 
             </div>
         );

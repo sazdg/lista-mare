@@ -6,6 +6,9 @@ function Home() {
     return (
         <div className="homepage">
             <h1>HOMEPAGE</h1> 
+            <p>vedi lista mare</p>
+            <p>aggiungi categoria</p>
+            <p>esci dall'account</p>
         </div>
     );
 }
