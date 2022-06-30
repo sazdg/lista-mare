@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import Footer from './components/Footer.js'
+import Login from './components/Login.js'
+import Pagine from './routes/Pagine.js'
+import Accedi from './screen/Accedi.js'
 
+
+//qui ci deve stare il template, quindi footer sicuro e navbar
+//poi pagine per fare il routing
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>LISTA MARE</h1>
+      <Pagine />
+      <Footer />
     </div>
   );
 }
