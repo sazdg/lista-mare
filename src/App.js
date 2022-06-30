@@ -1,8 +1,7 @@
 import './App.css'
 import Footer from './components/Footer.js'
-import Login from './components/Login.js'
 import Pagine from './routes/Pagine.js'
-import Accedi from './screen/Accedi.js'
+import Layout from './routes/Layout.js'
 
 
 //qui ci deve stare il template, quindi footer sicuro e navbar
@@ -10,7 +9,6 @@ import Accedi from './screen/Accedi.js'
 function App() {
   return (
     <div className="App">
-      <h1>LISTA MARE</h1>
       <Pagine />
       <Footer />
     </div>

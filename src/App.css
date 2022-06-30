@@ -2,3 +2,9 @@ footer {
   background-color: skyblue;
   text-align: center;
 }
+
+.link {
+  margin: auto;
+  padding: 10px;
+  width: 40px;
+}
