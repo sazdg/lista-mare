@@ -10,14 +10,6 @@ footer {
 }
 
 .error {
-  background-color: #ff938f;
-  padding: 5px;
-  border-radius: 10px;
-  margin: 5px;
-  text-align: center;
-}
-.success {
-  background-color: #90e991;
   padding: 5px;
   border-radius: 10px;
   margin: 5px;

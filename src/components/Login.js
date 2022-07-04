@@ -1,8 +1,7 @@
 import { Component } from 'react';
 import axios from 'axios';
 import '../App.css';
-import Dashboard from '../screen/Dashboard';
-import { useLocation, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 class Login extends Component {
@@ -13,7 +12,10 @@ class Login extends Component {
         this.state = {
             username: "",
             password: "",
-            error: null
+            message: null,
+            visible: "hidden",
+            color:null
+
         };
     }
 
@@ -30,10 +32,20 @@ class Login extends Component {
         .then(response => {
             console.log(response.data)
             if (response.data.login) {
-               //<Navigate to="/dashboard" replace={true} />
-               //TODO redirect a pagina dashboard
+                let element = <Link to="/dashboard" className="link">"Go to Dashboard"</Link>
+                
+               this.setState({
+                message: element,
+                visible: "visible",
+                color: "#90e991"
+               })
+               
             } else {
-               //TODO appare P con messaggio e reload page per cambiare credenziali
+                this.setState({
+                    message: response.data.message,
+                    visible: "visible",
+                    color: "#ff938f"
+                })
             }
         })
         .catch(error => this.setState({ error: error.message}));
@@ -81,7 +93,7 @@ class Login extends Component {
                     
                 </form>
                 
-                <p className="error">{this.state.error}</p>
+                <p className="error" style={{visibility:this.state.visible, backgroundColor:this.state.color}}>{this.state.message}</p>
 
             </div>
         );

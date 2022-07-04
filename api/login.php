@@ -22,13 +22,19 @@ if(isset($request) && !empty($request)){
 
     if(mysqli_num_rows($result) >= 1){
         $row = mysqli_fetch_assoc($result);
-        echo json_encode(["login" => true, "message" => "Trovato risultato in db con nome " . $row["username"]]);
+        if($password == $row["password"]){
+            echo json_encode(["login" => true, "message" => "Trovato risultato in db con nome " . $row["username"]]);
+        } else {
+            echo json_encode(["login" => false, "message" => "Reinserire le credenziali"]);
+        }
+    
+        
     } else {
         echo json_encode(["login" => false, "message" => "Credenziali sbagliate"]);
     }
 
 } else {
-    echo json_encode(["message" => "Non sono arrivati i dati che hai inviato"]);
+    echo json_encode(["login" => false, "message" => "Non sono arrivati i dati che hai inviato"]);
 }
 
 
