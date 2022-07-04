@@ -15,7 +15,6 @@ class Login extends Component {
             message: null,
             visible: "hidden",
             color:null
-
         };
     }
 
@@ -32,7 +31,7 @@ class Login extends Component {
         .then(response => {
             console.log(response.data)
             if (response.data.login) {
-                let element = <Link to="/dashboard" className="link">"Go to Dashboard"</Link>
+                let element = <Link to="/dashboard" className="link">Go to Dashboard</Link>
                 
                this.setState({
                 message: element,
@@ -48,7 +47,7 @@ class Login extends Component {
                 })
             }
         })
-        .catch(error => this.setState({ error: error.message}));
+            .catch(error => this.setState({ message: error.message}));
     }
 
 /*

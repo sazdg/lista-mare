@@ -22,8 +22,12 @@ if(isset($request) && !empty($request)){
 
     if(mysqli_num_rows($result) >= 1){
         $row = mysqli_fetch_assoc($result);
-        if($password == $row["password"]){
-            echo json_encode(["login" => true, "message" => "Trovato risultato in db con nome " . $row["username"]]);
+        if($password === $row["password"]){
+
+            session_start();
+            $_SESSION["user"] = $row["username"];
+
+            echo json_encode(["login" => true, "message" => "Trovato risultato in db con nome " . $_SESSION["user"]]);
         } else {
             echo json_encode(["login" => false, "message" => "Reinserire le credenziali"]);
         }
