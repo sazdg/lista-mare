@@ -60,7 +60,6 @@ class CheckLogin extends Component {
 
             <div>
                 <p style={{visibility:this.state.visible}}>{this.state.log}</p>
-                
             </div>
         );
     }
