@@ -15,6 +15,7 @@ class CheckLogin extends Component {
         };
     }
 
+    //TODO non funziona l'assegnazione della var 
     componentDidMount() {
 
         axios.get('http://localhost/lista-mare/api/checkLogin.php')
@@ -40,24 +41,8 @@ class CheckLogin extends Component {
     }
 
 
-    componentWillUnmount(){}
     
 
-    /*
-        tryLogin(event) {
-            console.log("click trylogin")
-            event.preventDefault()
-            
-            axios.post("http://localhost/lista-mare/api/login.php", this.state)
-                .then((response) => {
-                    console.log(response.data)
-                })
-                .catch(error => {
-                    alert(error.message)
-                })
-    
-        }
-    */
     //how to send data from react to php api
     //install axios using npm, it works well with http requests
 
