@@ -1,7 +1,4 @@
 <?php
-session_start();
-error_reporting(E_ALL ^ E_NOTICE);
-
 //stabilisco i permessi di lettura del file (anyone)
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: *");
@@ -25,12 +22,11 @@ if(isset($request) && !empty($request)){
 
     if(mysqli_num_rows($result) >= 1){
         $row = mysqli_fetch_assoc($result);
-        if($password === $row["password"]){
-            
-            $_SESSION['utente'] = $row['username'];
+        if($password === $row['password']){
+ 
 
-            echo json_encode(["login" => true, "message" => "Trovato risultato in db con nome " . $_SESSION['utente']]);
-            //header('Location: page3.php');
+            echo json_encode(["login" => true, "message" => "Trovato risultato in db con nome " . $username]);
+            //header('Location: http://localhost:3000/dashboard');
         } else {
             echo json_encode(["login" => false, "message" => "Reinserire le credenziali"]);
         }
