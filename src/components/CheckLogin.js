@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import axios from 'axios';
 import '../App.css';
 import { Link } from 'react-router-dom';
+import { ReactSession } from 'react-client-session';
 
 
 class CheckLogin extends Component {
@@ -11,41 +11,48 @@ class CheckLogin extends Component {
         super(props);
         this.state = {
             log: null,
-            visible: "hidden",
+            visible: "hidden"
         };
     }
 
-    //TODO non funziona l'assegnazione della var 
     componentDidMount() {
 
-        axios.get('http://localhost/lista-mare/api/checkLogin.php')
-            .then(response => {
-                console.log(response.data)
-                if (response.data.login) {
-                    this.setState({
-                        log: "todo okay",
-                        visible: "visible",
-                        color: "#90e991"
-                    })
+        // axios.get('http://localhost/lista-mare/api/checkLogin.php')
+        //     .then(response => {
+        //         console.log(response.data)
+        //         if (response.data.login) {
+        //             this.setState({
+        //                 log: "todo okay",
+        //                 visible: "visible",
+        //                 color: "#90e991"
+        //             })
 
-                } else {
-                    let element = <Link to="/accedi" className="link">Fai il login per vedere la pagina</Link>
-                    this.setState({
-                        log: element,
-                        visible: "visible",
-                        color: "#ff938f"
-                    })
-                }
-            })
-            .catch(error => this.setState({ log: error.message }));
+        //         } else {
+        //             let element = <Link to="/accedi" className="link">Fai il login per vedere la pagina</Link>
+        //             this.setState({
+        //                 log: element,
+        //                 visible: "visible",
+        //                 color: "#ff938f"
+        //             })
+        //         }
+        //     })
+        //     .catch(error => this.setState({ log: error.message }));
+
+        if (ReactSession.get("username") === "" || ReactSession.get("username") == null){
+                let element = <Link to="/accedi" className="goto">Fai il login per vedere la pagina</Link>
+                this.setState({
+                    log: element,
+                    visible: "visible"
+                })
+            } else {
+                this.setState({
+                    log: "Sei loggat*",
+                    visible: "visible"
+                })
+            }
+
+
     }
-
-
-    
-
-    //how to send data from react to php api
-    //install axios using npm, it works well with http requests
-
 
     render() {
 
