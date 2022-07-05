@@ -24,8 +24,8 @@ if(isset($request) && !empty($request)){
         $row = mysqli_fetch_assoc($result);
         if($password === $row['password']){
  
-
-            echo json_encode(["login" => true, "message" => "Trovato risultato in db con nome " . $username]);
+            session_start();
+            echo json_encode(["login" => true, "message" => "Trovato risultato in db con nome " . $username, "utente" => $username]);
             //header('Location: http://localhost:3000/dashboard');
         } else {
             echo json_encode(["login" => false, "message" => "Reinserire le credenziali"]);

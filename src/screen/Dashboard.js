@@ -1,15 +1,17 @@
 import React from "react";
 import '../App.css';
-import CheckLogin from '../components/CheckLogin.js';
+import { ReactSession } from 'react-client-session';
 
 
 function Dashboard() {
+    const username = ReactSession.get("username")
+
 
     //TODO se sei loggato vedi la pagina, altrimenti messaggio "fai il login"
     return (
         <div className="dashboard">
             <h1>LA TUA LISTA</h1>
-            <CheckLogin />
+                <p>Username is: {username}</p>
         </div>
     );
 }

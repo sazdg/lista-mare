@@ -2,6 +2,7 @@ import { Component } from 'react';
 import axios from 'axios';
 import '../App.css';
 import { Link } from 'react-router-dom';
+import { ReactSession } from 'react-client-session';
 
 
 class Login extends Component {
@@ -38,6 +39,9 @@ class Login extends Component {
                 visible: "visible",
                 color: "#90e991"
                })
+
+               ReactSession.setStoreType("localStorage")
+               ReactSession.set("username",response.data.utente)
                
             } else {
                 this.setState({

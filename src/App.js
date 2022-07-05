@@ -1,7 +1,6 @@
 import './App.css'
 import Footer from './components/Footer.js'
 import Pagine from './routes/Pagine.js'
-import Layout from './routes/Layout.js'
 
 
 //qui ci deve stare il template, quindi footer sicuro e navbar
