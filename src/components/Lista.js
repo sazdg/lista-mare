@@ -2,6 +2,7 @@ import { Component } from 'react';
 import axios from 'axios';
 import '../App.css';
 import { ReactSession } from 'react-client-session';
+import CheckLogin from './CheckLogin';
 
 
 class Lista extends Component {
@@ -23,16 +24,16 @@ class Lista extends Component {
     }
     LoadLista() {
 
-        var element = <div>Fai il login per vedere la lista</div>
+        var element = ""
 
         if (ReactSession.get("username") === "" || ReactSession.get("username") == null){
 
             this.setState({
-                log: element
+                log: <CheckLogin />
             })
-
             
-
+    
+        
         } else {
             axios.get('http://localhost/lista-mare/api/lista.php')
                 .then(response => {
@@ -40,11 +41,9 @@ class Lista extends Component {
 
                     element = <div></div>
                     if (response.data.return) {
-                        response.data.item.forEach(coso => {
-                            element += <input type="checkbox" name={coso} value={coso}>{coso}</input>
-                        })
-
-
+                        for(let i = 0; i < response.data.item.lenght; i++){
+                            element += <input type="checkbox" name={response.data.item[i]} value={response.data.item[i]}>{response.data.item[i]}</input>
+                        }
                     } else {
 
                         this.setState({
