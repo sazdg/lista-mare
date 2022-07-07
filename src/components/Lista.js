@@ -15,37 +15,45 @@ class Lista extends Component {
             password: "",
             message: null,
             visible: "hidden",
-            color: null
+            color: null,
+            risultati: []
         };
     }
 
+    
     componentDidMount(){
         this.LoadLista()
     }
-    LoadLista() {
 
-        var element = ""
+
+
+    LoadLista() {
+        var rows = []
+        
 
         if (ReactSession.get("username") === "" || ReactSession.get("username") == null){
 
             this.setState({
                 log: <CheckLogin />
             })
-            
-    
         
         } else {
             axios.get('http://localhost/lista-mare/api/lista.php')
                 .then(response => {
                     console.log(response.data)
+                    
 
-                    element = <div></div>
                     if (response.data.return) {
-                        for(let i = 0; i < response.data.item.lenght; i++){
-                            element += <input type="checkbox" name={response.data.item[i]} value={response.data.item[i]}>{response.data.item[i]}</input>
+                        for (let i = 0; i < response.data.item.length; i++){
+                            
+                            rows.push({ item: response.data.item[i].item, categoria: response.data.item[i].categoria, preso: response.data.item[i].preso, usato: response.data.item[i].usato })
                         }
-                    } else {
+                        this.setState({
+                            risultati: rows
+                        })
+                    
 
+                    } else {
                         this.setState({
                             log: <div>nada</div>,
                             visible: "visible",
@@ -61,14 +69,17 @@ class Lista extends Component {
     
     
     render() {
-
-
         return (
-
             <div>
 
                 <p>{this.state.log}</p>
+                {
+                this.state.risultati.map((object, index) => (
 
+                <li key={index}>
+                    {object.item} ({object.categoria})
+                </li>
+                ))}
             </div>
         );
     }
