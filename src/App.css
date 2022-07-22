@@ -28,3 +28,22 @@ nav {
   padding: 15px;
 
 }
+
+
+li {
+  padding: 0.5rem;
+}
+.preso {
+  list-style-type: disc;
+  font-weight: 700;
+}
+.nonpreso:hover {
+  cursor: cell;
+}
+.nonpreso {
+  list-style-type: circle;
+}
+.preso:hover {
+  cursor: not-allowed;
+}
+

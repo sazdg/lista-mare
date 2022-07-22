@@ -66,6 +66,18 @@ class Lista extends Component {
 
     }
 
+
+    ItemPreso(i){
+        axios.get('http://localhost/lista-mare/api/itemPreso.php?index=' + i)
+            .then(response => {
+
+                if (response.data.return) {
+                    console.log(response.data)
+                } else {
+                    console.log(response.data)
+                }
+            })
+    }
     
     
     render() {
@@ -73,13 +85,16 @@ class Lista extends Component {
             <div>
 
                 <p>{this.state.log}</p>
-                {
-                this.state.risultati.map((object, index) => (
+                    {
+                    this.state.risultati.map((object, index) => (
+                       
+                        <li key={index} className={object.preso} onClick={this.ItemPreso(object.id)}>
+                            {object.item.toUpperCase()} ({object.categoria})
+                        </li>
+                
 
-                <li key={index}>
-                    {object.item} ({object.categoria})
-                </li>
-                ))}
+                    ))}
+                
             </div>
         );
     }

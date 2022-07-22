@@ -1,5 +1,5 @@
 <?php
-
+//non usato
 require("./config.php");
 
 class ListItem {

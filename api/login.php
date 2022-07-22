@@ -28,12 +28,12 @@ if(isset($request) && !empty($request)){
             echo json_encode(["login" => true, "message" => "Trovato risultato in db con nome " . $username, "utente" => $username]);
             //header('Location: http://localhost:3000/dashboard');
         } else {
-            echo json_encode(["login" => false, "message" => "Reinserire le credenziali"]);
+            echo json_encode(["login" => false, "message" => "Reinserire le credenziali" . $username]);
         }
     
         
     } else {
-        echo json_encode(["login" => false, "message" => "Credenziali sbagliate"]);
+        echo json_encode(["login" => false, "message" => "Credenziali sbagliate" . $username]);
     }
 
 } else {
