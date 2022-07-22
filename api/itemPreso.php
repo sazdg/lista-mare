@@ -13,7 +13,7 @@ $query = "UPDATE items SET preso = 'preso' WHERE id_item = $index";
 
 $result = mysqli_query($db,$query);
 
-    if(mysqli_num_rows($result) = 1){
+    if(mysqli_num_rows($result) === true){
         echo json_encode(["return" => true, "index" => $index]);
        
     } else {

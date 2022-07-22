@@ -23,6 +23,8 @@ class Lista extends Component {
     
     componentDidMount(){
         this.LoadLista()
+        //every 1 minute
+        setTimeout(this.LoadLista(), 2000)
     }
 
 
@@ -68,11 +70,13 @@ class Lista extends Component {
 
 
     ItemPreso(i){
+        console.log("cliccato " + i)
         axios.get('http://localhost/lista-mare/api/itemPreso.php?index=' + i)
             .then(response => {
 
                 if (response.data.return) {
                     console.log(response.data)
+                    this.LoadLista()
                 } else {
                     console.log(response.data)
                 }
@@ -86,14 +90,14 @@ class Lista extends Component {
 
                 <p>{this.state.log}</p>
                     {
-                    this.state.risultati.map((object, index) => (
+                    this.state.risultati.map((object, index) => {
                        
-                        <li key={index} className={object.preso} onClick={this.ItemPreso(object.id)}>
-                            {object.item.toUpperCase()} ({object.categoria})
-                        </li>
+                        return (<li key={index} name={object.id} className={object.preso} >
+                            {object.item.toUpperCase()} ({object.categoria}) <br/><button type="button" className={object.preso} onClick={() => this.ItemPreso(object.id)}>PRESO</button><button type="button" className={object.usato} >USATO</button>
+                        </li>)
                 
 
-                    ))}
+                        })}
                 
             </div>
         );

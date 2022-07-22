@@ -37,13 +37,38 @@ li {
   list-style-type: disc;
   font-weight: 700;
 }
-.nonpreso:hover {
-  cursor: cell;
-}
 .nonpreso {
   list-style-type: circle;
 }
-.preso:hover {
-  cursor: not-allowed;
+
+button.preso, button.nonpreso, button.usato, button.nonusato {
+  width: 6rem;
+  padding: 8px;
+  margin: 4px;
+  font-size: 12px;
+  cursor:grab;
+}
+button.preso {
+  background-color: rgb(176, 248, 224);
+  border-radius: 10px;
+  border: none;
+}
+button.nonpreso {
+  background-color: rgb(249, 200, 200);
+  border-radius: 10px;
+  border: none;
+}
+
+
+button.usato {
+  background-color: rgb(176, 248, 224);
+  border-radius: 10px;
+  border: none;
+}
+
+button.nonusato {
+  background-color: rgb(249, 200, 200);
+  border-radius: 10px;
+  border: none;
 }
 
