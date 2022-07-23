@@ -41,7 +41,7 @@ li {
   list-style-type: circle;
 }
 
-button.preso, button.nonpreso, button.usato, button.nonusato {
+button.preso, button.nonpreso, button.usato, button.nonusato, button.cancella {
   width: 6rem;
   padding: 8px;
   margin: 4px;
@@ -74,3 +74,17 @@ button.nonusato {
   border: none;
 }
 
+button.cancella {
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid red;
+  color: red;
+}
+button.cancella:hover {
+  background-color: rgb(255, 223, 223);
+  box-shadow: 1px 2px;
+}
+button.preso:hover, button.nonpreso:hover, button.usato:hover, button.nonusato:hover{
+  border: 1px solid black;
+  box-shadow: 1px 2px;
+}

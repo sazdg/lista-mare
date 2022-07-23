@@ -84,7 +84,6 @@ class Lista extends Component {
     }
 
     ItemUsato(i) {
-        console.log("cliccato " + i)
         axios.get('http://localhost/lista-mare/api/itemUsato.php?index=' + i)
             .then(response => {
 
@@ -96,6 +95,28 @@ class Lista extends Component {
                 }
             })
     }
+
+    ItemElimina(i, nome) {
+
+        
+        var risposta = window.confirm("Stai per eliminare " + nome + ", sei sicuro?")
+        if (risposta){
+            axios.get('http://localhost/lista-mare/api/itemEliminato.php?index=' + i)
+            .then(response => {
+
+                if (response.data.return) {
+                    console.log(response.data)
+                    this.LoadLista()
+                } else {
+                    console.log(response.data)
+                }
+            })
+
+        } 
+        
+    }
+
+   
     
     
     render() {
@@ -107,7 +128,10 @@ class Lista extends Component {
                     this.state.risultati.map((object, index) => {
                        
                         return (<li key={index} className={object.preso} >
-                            {object.item.toUpperCase()} ({object.categoria}) <br /><button type="button" className={object.preso} onClick={() => this.ItemPreso(object.id)}>PRESO</button><button type="button" className={object.usato} onClick={() => this.ItemUsato(object.id)}>USATO</button>
+                            {object.item.toUpperCase()} ({object.categoria}) 
+                            <br /><button type="button" className={object.preso} onClick={() => this.ItemPreso(object.id)}>PRESO</button>
+                            <button type="button" className={object.usato} onClick={() => this.ItemUsato(object.id)}>USATO</button>
+                            <button type="button" className="cancella" onClick={() => this.ItemElimina(object.id, object.item)}>ELIMINA</button>
                         </li>)
                 
 
