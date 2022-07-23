@@ -41,7 +41,7 @@ li {
   list-style-type: circle;
 }
 
-button.preso, button.nonpreso, button.usato, button.nonusato, button.cancella {
+button.preso, button.nonpreso, button.usato, button.nonusato, button.cancella, button.aggiungi {
   width: 6rem;
   padding: 8px;
   margin: 4px;
@@ -72,6 +72,17 @@ button.nonusato {
   background-color: rgb(249, 200, 200);
   border-radius: 10px;
   border: none;
+}
+
+button.aggiungi {
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid rgb(16, 181, 16);
+  color:rgb(16, 181, 16);
+}
+button.aggiungi:hover {
+  background-color: rgb(212, 255, 212);
+  box-shadow: 1px 2px;
 }
 
 button.cancella {

@@ -4,8 +4,8 @@ function Footer() {
 
     return (
         <footer>
-            <span>Made with love ❤ with ReactJS<br />2022
-            </span>
+            <p>Made with love ❤ with ReactJS<br />2022
+            </p>
         </footer>
     );
 }

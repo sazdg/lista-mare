@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../App.css';
 import { ReactSession } from 'react-client-session';
 import CheckLogin from './CheckLogin';
+import Aggiungi from './Aggiungi';
 
 
 class Lista extends Component {
@@ -23,8 +24,6 @@ class Lista extends Component {
     
     componentDidMount(){
         this.LoadLista()
-        //every 1 minute
-        setTimeout(this.LoadLista(), 2000)
     }
 
 
@@ -40,7 +39,7 @@ class Lista extends Component {
             })
         
         } else {
-            axios.get('http://localhost/lista-mare/api/lista.php')
+            axios.get('http://localhost/lista-mare/api/itemLista.php')
                 .then(response => {
                     console.log(response.data)
                     
@@ -124,6 +123,9 @@ class Lista extends Component {
             <div>
 
                 <p>{this.state.log}</p>
+                
+                <Aggiungi />
+                
                     {
                     this.state.risultati.map((object, index) => {
                        
