@@ -24,6 +24,8 @@ class Lista extends Component {
     
     componentDidMount(){
         this.LoadLista()
+        //every 1 minute
+        setTimeout(this.LoadLista(), 1000)
     }
 
 
@@ -69,7 +71,6 @@ class Lista extends Component {
 
 
     ItemPreso(i){
-        //console.log("cliccato " + i)
         axios.get('http://localhost/lista-mare/api/itemPreso.php?index=' + i)
             .then(response => {
 

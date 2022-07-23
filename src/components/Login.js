@@ -30,7 +30,6 @@ class Login extends Component {
             data: this.state
         })
         .then(response => {
-            console.log(response.data)
             if (response.data.login) {
                 let element = <Link to="/dashboard" className="goto">Go to Dashboard</Link>
                 
