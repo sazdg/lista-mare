@@ -52,6 +52,7 @@ button.preso {
   background-color: rgb(176, 248, 224);
   border-radius: 10px;
   border: none;
+  font-weight: 700;
 }
 button.nonpreso {
   background-color: rgb(249, 200, 200);
@@ -64,6 +65,7 @@ button.usato {
   background-color: rgb(176, 248, 224);
   border-radius: 10px;
   border: none;
+  font-weight: 700;
 }
 
 button.nonusato {
