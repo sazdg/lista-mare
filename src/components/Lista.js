@@ -48,7 +48,7 @@ class Lista extends Component {
                     if (response.data.return) {
                         for (let i = 0; i < response.data.item.length; i++){
                             
-                            rows.push({ item: response.data.item[i].item, categoria: response.data.item[i].categoria, preso: response.data.item[i].preso, usato: response.data.item[i].usato })
+                            rows.push({ id: response.data.item[i].id, item: response.data.item[i].item, categoria: response.data.item[i].categoria, preso: response.data.item[i].preso, usato: response.data.item[i].usato })
                         }
                         this.setState({
                             risultati: rows
@@ -70,7 +70,7 @@ class Lista extends Component {
 
 
     ItemPreso(i){
-        console.log("cliccato " + i)
+        //console.log("cliccato " + i)
         axios.get('http://localhost/lista-mare/api/itemPreso.php?index=' + i)
             .then(response => {
 
@@ -92,7 +92,7 @@ class Lista extends Component {
                     {
                     this.state.risultati.map((object, index) => {
                        
-                        return (<li key={index} name={object.id} className={object.preso} >
+                        return (<li key={index} className={object.preso} >
                             {object.item.toUpperCase()} ({object.categoria}) <br/><button type="button" className={object.preso} onClick={() => this.ItemPreso(object.id)}>PRESO</button><button type="button" className={object.usato} >USATO</button>
                         </li>)
                 

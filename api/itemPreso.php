@@ -9,11 +9,11 @@ require("config.php");
 
 $index = $_GET["index"];
 
-$query = "UPDATE items SET preso = 'preso' WHERE id_item = $index";
+$query = "UPDATE items SET preso = CASE WHEN preso = 'nonpreso' THEN 'preso' ELSE 'nonpreso' END WHERE id_item = $index";
 
 $result = mysqli_query($db,$query);
 
-    if(mysqli_num_rows($result) === true){
+    if($result){
         echo json_encode(["return" => true, "index" => $index]);
        
     } else {
