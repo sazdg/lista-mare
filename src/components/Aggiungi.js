@@ -19,9 +19,6 @@ class Aggiungi extends Component {
         this.categorie = {
             cat
         }
-    }
-
-    componentWillMount(){
         this.getCategorie()
     }
 
@@ -79,13 +76,16 @@ class Aggiungi extends Component {
             return (
 
                 <div>
-                    <p>Aggiungi un item</p>
-                    <form action="#">
+                    
+                    <form action="#" className="styleAggiungi">
+                        <span style={{fontWeight: 'bold'}}>AGGIUNGI UN ITEM</span><br/>
                         <label>Nome</label><br />
                         <input type="text" id="nome" name="nome"
                             value={this.state.nome}
+                            maxLength="50"
                             onChange={(e) => this.setState({ nome: e.target.value })}
-                            require />
+                            className="inputAggiungi"
+                            required />
                         <br />
 
                         <label>Categoria</label><br />
@@ -94,8 +94,12 @@ class Aggiungi extends Component {
                             id="categoria"
                             value={this.state.categoria}
                             onChange={(e) => this.setState({ categoria: e.target.value })}
+                            className="inputAggiungi"
                             required >
-                                <option value="NULL" selected> Scegli la categoria </option>
+                            <option value="NULL"
+                                defaultInputValue="defaultInputValue"> Scegli la categoria
+                            </option>
+
                             {this.categorie.cat.map((element, index) => {
                                 return <option  key={index} value={element.id}>
                                     {element.id} - {element.categoria}
@@ -104,13 +108,13 @@ class Aggiungi extends Component {
                         </select>
 
                         <br />
-                        <input type="checkbox" value={this.state.preso}
-                            onClick={() => this.CbxPreso()} />PRESO
-                        <input type="checkbox" value={this.state.usato}
-                            onClick={() => this.CbxUsato()} />USATO
+                        <span className="inputAggiungi"><input type="checkbox" value={this.state.preso} 
+                            onClick={() => this.CbxPreso()} /> PRESO</span><br/>
+                        <span className="inputAggiungi"><input type="checkbox" value={this.state.usato} 
+                            onClick={() => this.CbxUsato()} /> USATO</span>
                         <br/>
                         <button type="button" className="aggiungi"
-                            onClick={() => this.itemAggiungi()}>Aggiungi</button>
+                            onClick={() => this.itemAggiungi()}>AGGIUNGI</button>
 
                     </form>
 

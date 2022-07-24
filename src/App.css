@@ -41,7 +41,7 @@ li {
   list-style-type: circle;
 }
 
-button.preso, button.nonpreso, button.usato, button.nonusato, button.cancella, button.aggiungi {
+button.preso, button.nonpreso, button.usato, button.nonusato, button.cancella, button.aggiungi, button.aggiorna, button.cerca {
   width: 6rem;
   padding: 8px;
   margin: 4px;
@@ -74,13 +74,13 @@ button.nonusato {
   border: none;
 }
 
-button.aggiungi {
+button.aggiungi, button.aggiorna, button.cerca {
   background-color: #fff;
   border-radius: 10px;
   border: 1px solid rgb(16, 181, 16);
   color:rgb(16, 181, 16);
 }
-button.aggiungi:hover {
+button.aggiungi:hover, button.aggiorna:hover, button.cerca:hover {
   background-color: rgb(212, 255, 212);
   box-shadow: 1px 2px;
 }
@@ -98,4 +98,35 @@ button.cancella:hover {
 button.preso:hover, button.nonpreso:hover, button.usato:hover, button.nonusato:hover{
   border: 1px solid black;
   box-shadow: 1px 2px;
+}
+
+.styleAggiungi {
+  margin: auto;
+  padding: 20px 5px;
+  border-top: 2px dotted #000;
+  border-bottom: 2px dotted #000;
+}
+
+input.inputAggiungi, input.cerca {
+  padding: 5px;
+  margin: 10px 0;
+  width: 250px;
+}
+
+select.inputAggiungi {
+  padding: 0px 1em 0 0;
+  margin: 10px 0;
+  width: 250px;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+span.inputAggiungi, input[type="checkbox"] {
+  padding: 5px;
+  margin: 10px 0;
+}
+
+.boxCerca {
+  margin: 10px 0;
+  border-bottom: 2px dotted #000;
 }

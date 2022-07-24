@@ -17,7 +17,9 @@ class Lista extends Component {
             message: null,
             visible: "hidden",
             color: null,
-            risultati: []
+            risultati: [],
+            cerca: "",
+            trovati: "hidden"
         };
     }
 
@@ -32,40 +34,31 @@ class Lista extends Component {
 
     LoadLista() {
         var rows = []
-        
 
-        if (ReactSession.get("username") === "" || ReactSession.get("username") == null){
+        axios.get('http://localhost/lista-mare/api/itemLista.php')
+            .then(response => {
+                console.log(response.data)
+                
 
-            this.setState({
-                log: <CheckLogin />
-            })
-        
-        } else {
-            axios.get('http://localhost/lista-mare/api/itemLista.php')
-                .then(response => {
-                    console.log(response.data)
-                    
-
-                    if (response.data.return) {
-                        for (let i = 0; i < response.data.item.length; i++){
-                            
-                            rows.push({ id: response.data.item[i].id, item: response.data.item[i].item, categoria: response.data.item[i].categoria, preso: response.data.item[i].preso, usato: response.data.item[i].usato })
-                        }
-                        this.setState({
-                            risultati: rows
-                        })
-                    
-
-                    } else {
-                        this.setState({
-                            log: <div>nada</div>,
-                            visible: "visible",
-                            color: "#ff938f"
-                        })
+                if (response.data.return) {
+                    for (let i = 0; i < response.data.item.length; i++){
+                        
+                    rows.push({ id: response.data.item[i].id, item: response.data.item[i].item, categoria: response.data.item[i].categoria, preso: response.data.item[i].preso, usato: response.data.item[i].usato })
                     }
-                })
-                .catch(error => this.setState({ log: error.message }));
-        }
+                    this.setState({
+                        risultati: rows
+                    })
+                
+
+                } else {
+                    this.setState({
+                        log: <div>nada</div>,
+                        visible: "visible",
+                        color: "#ff938f"
+                    })
+                }
+            })
+            .catch(error => this.setState({ log: error.message }));
 
     }
 
@@ -116,17 +109,62 @@ class Lista extends Component {
         
     }
 
-   
-    
+    Cerca() {
+        axios.get('http://localhost/lista-mare/api/itemCerca.php?nome=' + this.state.cerca)
+            .then(response => {
+
+                if (response.data.return && response.data.trovati >= 1) {
+                    this.setState({
+                        trovati: "visible"
+                    })
+                    console.log(response.data.trovati)
+
+                    response.data.trovati.map((object, index) => {
+                        
+                        return (
+                            <li key={index} className={object.preso} >
+                                {object.item.toUpperCase()} ({object.categoria})
+                                <br /><button type="button" className={object.preso} onClick={() => this.ItemPreso(object.id)}>PRESO</button>
+                                <button type="button" className={object.usato} onClick={() => this.ItemUsato(object.id)}>USATO</button>
+                                <button type="button" className="cancella" onClick={() => this.ItemElimina(object.id, object.item)}>ELIMINA</button>
+                            </li>
+                        )
+                    })
+                       
+                } else {
+                    console.log(response.data)
+                }
+            })
+    }
+
     
     render() {
+        
+
+    if (ReactSession.get("username") === "" || ReactSession.get("username") == null) {
+        return(
+            <CheckLogin />
+        );
+
+    } else {
         return (
             <div>
 
                 <p>{this.state.log}</p>
+
+                <button type="button" className="aggiorna" onClick={() => this.LoadLista()}>AGGIORNA</button>
+                <br/><br/>
                 
                 <Aggiungi />
-                
+                <br />
+
+                <div className="boxCerca">
+                    <input type="text" className="cerca" placeholder="Cerca..." 
+                        onChange={(e) => this.setState({ cerca: e.target.value })}/>
+                    <button type="button" className="cerca" onClick={() => this.Cerca()}>CERCA</button>
+                    <div className="risultatiTrovati" style={{ visibility: this.state.trovati}}>...</div>
+                </div>
+
                     {
                     this.state.risultati.map((object, index) => {
                        
@@ -142,6 +180,8 @@ class Lista extends Component {
                 
             </div>
         );
+    }
+    
     }
 }
 export default Lista;
