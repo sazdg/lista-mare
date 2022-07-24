@@ -12,11 +12,16 @@ class Aggiungi extends Component {
             nome: "",
             categoria: "",
             preso: "nonpreso",
-            usato: "nonusato"
+            usato: "nonusato",
+        }
+
+        const cat = []
+        this.categorie = {
+            cat
         }
     }
 
-    componentDidMount(){
+    componentWillMount(){
         this.getCategorie()
     }
 
@@ -41,7 +46,7 @@ class Aggiungi extends Component {
             .then(response => {
 
                 if (response.data.return) {
-                    console.log(response.data)
+                    console.log("aggiunto")
                 } else {
                     console.log(response.data)
                 }
@@ -51,14 +56,13 @@ class Aggiungi extends Component {
     getCategorie(){
         axios.get('http://localhost/lista-mare/api/getCategorie.php')
             .then(response => {
-                console.log(response.data)
-
                 if (response.data.return) {
-                    const categorie = []
-                    response.data.categorie.forEach((element) => {
-                        categorie.push({id: element.id, categoria: element.cat})
-                    })
 
+                    for (let i = 0; i < response.data.categorie.length; i++){
+                        let id = response.data.categorie[i].id
+                        let nome = response.data.categorie[i].cat
+                        this.categorie.cat.push({id: id, categoria: nome})
+                    }
 
                 } else {
                     console.log(response.data)
@@ -85,10 +89,19 @@ class Aggiungi extends Component {
                         <br />
 
                         <label>Categoria</label><br />
-                        <input type="text" id="categoria" name="categoria"
+                        <select
+                            name="categorie"
+                            id="categoria"
                             value={this.state.categoria}
                             onChange={(e) => this.setState({ categoria: e.target.value })}
-                            required />
+                            required >
+                                <option value="NULL" selected> Scegli la categoria </option>
+                            {this.categorie.cat.map((element, index) => {
+                                return <option  key={index} value={element.id}>
+                                    {element.id} - {element.categoria}
+                                </option>
+                            })}
+                        </select>
 
                         <br />
                         <input type="checkbox" value={this.state.preso}
