@@ -2,8 +2,8 @@ import { Component } from 'react';
 import axios from 'axios';
 import '../App.css';
 import { ReactSession } from 'react-client-session';
-import CheckLogin from './CheckLogin';
-import Aggiungi from './Aggiungi';
+import CheckLogin from './CheckLogin.js';
+import Aggiungi from './Aggiungi.js';
 
 
 class Lista extends Component {
@@ -31,6 +31,13 @@ class Lista extends Component {
         setTimeout(this.LoadLista(), 1000)
     }
 
+    componentDidUpdate(_, prevState){
+        
+        if (this.state.filtro !== prevState.filtro){
+            this.LoadLista(this.state.filtro)
+            console.log(this.state.filtro + " + old one: " + prevState.filtro)
+        }
+    }
 
 
     LoadLista(element) {
@@ -176,10 +183,10 @@ class Lista extends Component {
 
                 <div className="filtri">
                     ORDER BY:  
-                    <button type="button" value="nome_item" className="btnFiltro" onClick={() => this.LoadLista("nome_item")}>A-Z</button>
-                    <button type="button" value="id_categoria" className="btnFiltro" onClick={() => this.LoadLista("id_categoria")}>CATEGORIE</button>
-                    <button type="button" value="preso" className="btnFiltro" onClick={() => this.LoadLista("preso")}>PRESO/NON</button>
-                    <button type="button" value="usato" className="btnFiltro" onClick={() => this.LoadLista("usato")}>USATO/NON</button>
+                    <button type="button" value="nome_item" className="btnFiltro" onClick={() => this.setState({ filtro: "nome_item"})}>A-Z</button>
+                    <button type="button" value="id_categoria" className="btnFiltro" onClick={() => this.setState({ filtro: "id_categoria"})}>CATEGORIE</button>
+                    <button type="button" value="preso" className="btnFiltro" onClick={() => this.setState({ filtro: "preso"})}>PRESO/NON</button>
+                    <button type="button" value="usato" className="btnFiltro" onClick={() => this.setState({ filtro: "usato"})}>USATO/NON</button>
                 </div>
 
                     {
