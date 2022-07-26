@@ -7,7 +7,10 @@ header('Access-Control-Allow-Methods: *');
 header('Access-Control-Allow-Headers: *');
 require("config.php");
 
-    $query = "SELECT i.id_item, i.nome_item, i.preso, i.usato, i.data_inserimento, c.categoria FROM items i LEFT JOIN categorie c ON c.id_categorie = i.id_categoria ORDER BY categoria";
+
+$filtro = $_GET["filtro"];
+
+    $query = "SELECT i.id_item, i.nome_item, i.preso, i.usato, i.data_inserimento, c.categoria FROM items i LEFT JOIN categorie c ON c.id_categorie = i.id_categoria ORDER BY $filtro";
 
     $result = mysqli_query($db,$query);
 

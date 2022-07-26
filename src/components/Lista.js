@@ -19,7 +19,8 @@ class Lista extends Component {
             color: null,
             risultati: [],
             cerca: "",
-            trovati: "hidden"
+            trovati: "hidden",
+            filtro: "id_categoria"
         };
     }
 
@@ -32,10 +33,17 @@ class Lista extends Component {
 
 
 
-    LoadLista() {
+    LoadLista(element) {
+
+        element = (element === undefined ? "id_categoria" : element)
+
+        this.setState({
+            filtro: element
+        })
+        
         var rows = []
 
-        axios.get('http://localhost/lista-mare/api/itemLista.php')
+        axios.get('http://localhost/lista-mare/api/itemLista.php?filtro=' + this.state.filtro)
             .then(response => {
                 console.log(response.data)
                 
@@ -137,7 +145,8 @@ class Lista extends Component {
             })
     }
 
-    
+
+
     render() {
         
 
@@ -150,7 +159,7 @@ class Lista extends Component {
         return (
             <div>
 
-                <p>{this.state.log}</p>
+                <span>{this.state.log}</span>
 
                 <button type="button" className="aggiorna" onClick={() => this.LoadLista()}>AGGIORNA</button>
                 <br/><br/>
@@ -163,6 +172,14 @@ class Lista extends Component {
                         onChange={(e) => this.setState({ cerca: e.target.value })}/>
                     <button type="button" className="cerca" onClick={() => this.Cerca()}>CERCA</button>
                     <div className="risultatiTrovati" style={{ visibility: this.state.trovati}}>...</div>
+                </div>
+
+                <div className="filtri">
+                    ORDER BY:  
+                    <button type="button" value="nome_item" className="btnFiltro" onClick={() => this.LoadLista("nome_item")}>A-Z</button>
+                    <button type="button" value="id_categoria" className="btnFiltro" onClick={() => this.LoadLista("id_categoria")}>CATEGORIE</button>
+                    <button type="button" value="preso" className="btnFiltro" onClick={() => this.LoadLista("preso")}>PRESO/NON</button>
+                    <button type="button" value="usato" className="btnFiltro" onClick={() => this.LoadLista("usato")}>USATO/NON</button>
                 </div>
 
                     {
