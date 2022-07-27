@@ -41,12 +41,18 @@ li {
   list-style-type: circle;
 }
 
-button.preso, button.nonpreso, button.usato, button.nonusato, button.cancella, button.aggiungi, button.aggiorna, button.cerca, button.btnFiltro {
+button.preso, button.nonpreso, button.usato, button.nonusato, button.cancella, button.aggiungi, button.aggiorna, button.cerca, button.btnFiltro{
   width: 6rem;
   padding: 8px;
   margin: 4px;
   font-size: 12px;
   cursor:grab;
+}
+button.cancel {
+  padding: 8px;
+  margin: 4px;
+  font-size: 12px;
+  cursor: grab;
 }
 button.preso {
   background-color: rgb(176, 248, 224);
@@ -85,13 +91,14 @@ button.aggiungi:hover, button.aggiorna:hover, button.cerca:hover {
   box-shadow: 1px 2px;
 }
 
-button.cancella {
+
+button.cancella, button.cancel {
   background-color: #fff;
   border-radius: 10px;
   border: 1px solid red;
   color: red;
 }
-button.cancella:hover {
+button.cancella:hover, button.cancel:hover {
   background-color: rgb(255, 223, 223);
   box-shadow: 1px 2px;
 }

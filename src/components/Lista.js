@@ -20,22 +20,20 @@ class Lista extends Component {
             risultati: [],
             cerca: "",
             trovati: "hidden",
-            filtro: "id_categoria"
+            filtro: "id_categoria",
+            risultatiCerca: [""]
         };
     }
 
     
     componentDidMount(){
         this.LoadLista()
-        //every 1 minute
-        setTimeout(this.LoadLista(), 1000)
     }
 
     componentDidUpdate(_, prevState){
         
         if (this.state.filtro !== prevState.filtro){
             this.LoadLista(this.state.filtro)
-            console.log(this.state.filtro + " + old one: " + prevState.filtro)
         }
     }
 
@@ -84,7 +82,8 @@ class Lista extends Component {
 
                 if (response.data.return) {
                     console.log(response.data)
-                    this.LoadLista()
+                    this.LoadLista(this.state.filtro)
+                    this.Cerca()
                 } else {
                     console.log(response.data)
                 }
@@ -97,7 +96,8 @@ class Lista extends Component {
 
                 if (response.data.return) {
                     console.log(response.data)
-                    this.LoadLista()
+                    this.LoadLista(this.state.filtro)
+                    this.Cerca()
                 } else {
                     console.log(response.data)
                 }
@@ -114,7 +114,8 @@ class Lista extends Component {
 
                 if (response.data.return) {
                     console.log(response.data)
-                    this.LoadLista()
+                    this.LoadLista(this.state.filtro)
+                    this.Cerca()
                 } else {
                     console.log(response.data)
                 }
@@ -125,28 +126,31 @@ class Lista extends Component {
     }
 
     Cerca() {
+        console.log(this.state.cerca + " da cercare")
         axios.get('http://localhost/lista-mare/api/itemCerca.php?nome=' + this.state.cerca)
             .then(response => {
 
-                if (response.data.return && response.data.trovati >= 1) {
+                if (response.data.return) {
                     this.setState({
                         trovati: "visible"
                     })
                     console.log(response.data.trovati)
 
-                    response.data.trovati.map((object, index) => {
-                        
-                        return (
-                            <li key={index} className={object.preso} >
-                                {object.item.toUpperCase()} ({object.categoria})
-                                <br /><button type="button" className={object.preso} onClick={() => this.ItemPreso(object.id)}>PRESO</button>
-                                <button type="button" className={object.usato} onClick={() => this.ItemUsato(object.id)}>USATO</button>
-                                <button type="button" className="cancella" onClick={() => this.ItemElimina(object.id, object.item)}>ELIMINA</button>
-                            </li>
-                        )
+                    var ris = []
+
+                    for (let i = 0; i < response.data.trovati.length; i++) {
+
+                        ris.push({ id: response.data.trovati[i].id, item: response.data.trovati[i].item, categoria: response.data.trovati[i].categoria, preso: response.data.trovati[i].preso, usato: response.data.trovati[i].usato })
+                    }
+                    this.setState({
+                        risultatiCerca: ris
                     })
                        
                 } else {
+                    this.setState({
+                        trovati: "visible",
+                        risultatiCerca: [""]
+                    })
                     console.log(response.data)
                 }
             })
@@ -178,7 +182,26 @@ class Lista extends Component {
                     <input type="text" className="cerca" placeholder="Cerca..." 
                         onChange={(e) => this.setState({ cerca: e.target.value })}/>
                     <button type="button" className="cerca" onClick={() => this.Cerca()}>CERCA</button>
-                    <div className="risultatiTrovati" style={{ visibility: this.state.trovati}}>...</div>
+                    <button type="button" className="cancel" onClick={() => this.setState({trovati: "hidden"})}>X</button>
+                    <div className="risultatiTrovati" style={{ visibility: this.state.trovati }}>
+                        {this.state.risultatiCerca.map((object, index) => {
+
+                            if(object === ""){
+                                return (<p>Nothing...</p>)
+                            } else {
+                                return (
+                                <li key={index} className={object.preso} >
+                                    {object.item.toUpperCase()} ({object.categoria})
+                                    <br /><button type="button" className={object.preso} onClick={() => this.ItemPreso(object.id)}>PRESO</button>
+                                    <button type="button" className={object.usato} onClick={() => this.ItemUsato(object.id)}>USATO</button>
+                                    <button type="button" className="cancella" onClick={() => this.ItemElimina(object.id, object.item)}>ELIMINA</button>
+                                </li>
+                                )
+
+                            }
+                        })
+                    }
+                    </div>
                 </div>
 
                 <div className="filtri">
