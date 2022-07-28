@@ -102,11 +102,10 @@ class Login extends Component {
                         <p>
                             utente: {sessionStorage.getItem("username")}
                         </p>
-                    <p className="error" style={{ visibility: 'visible'}}
-                    >
-                        <button type="button" className="cancel">
-                            <Link to="/dashboard">GO TO DASHBOARD</Link>
-                            </button>
+                    <p style={{ visibility: 'visible'}}>
+                        
+                            <Link to="/dashboard"><button type="button" className="btnGoto">GO TO DASHBOARD</button></Link>
+                            
                     </p>
                         <button type="button" className='cancel' onClick={() => this.deleteSession()}>LOGOUT</button>
                     <br/><br/>
