@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: *");
 // definisco il metodo consentito per la request
 header("Access-Control-Allow-Headers: *");
-require("config.php");
+require("configLogin.php");
 
 
 $request = json_decode(file_get_contents("php://input"), true);

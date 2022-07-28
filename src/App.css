@@ -48,7 +48,12 @@ li {
 .nonpreso {
   list-style-type: circle;
 }
-
+.btnGoto {
+    padding: 8px;
+    margin: 4px;
+    font-size: 12px;
+    cursor: grab;
+ }
 button.preso, button.nonpreso, button.usato, button.nonusato, button.cancella, button.aggiungi, button.aggiorna, button.cerca, button.btnFiltro, input.faiLogin {
   width: 6rem;
   padding: 8px;
@@ -88,13 +93,13 @@ button.nonusato {
   border: none;
 }
 
-button.aggiungi, button.aggiorna, button.cerca {
+button.aggiungi, button.aggiorna, button.cerca, button.btnGoto {
   background-color: #fff;
   border-radius: 10px;
   border: 1px solid rgb(16, 181, 16);
   color:rgb(16, 181, 16);
 }
-button.aggiungi:hover, button.aggiorna:hover, button.cerca:hover {
+button.aggiungi:hover, button.aggiorna:hover, button.cerca:hover, button.btnGoto:hover {
   background-color: rgb(212, 255, 212);
   box-shadow: 1px 2px;
 }

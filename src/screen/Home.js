@@ -7,7 +7,6 @@ function Home() {
         <div className="homepage">
             <h1>HOMEPAGE</h1>
             <p>aggiungi categoria</p>
-            <p>tasto go to dashboard</p>
         </div>
     );
 }

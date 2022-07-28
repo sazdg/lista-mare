@@ -6,7 +6,7 @@ header("Access-Control-Allow-Headers: *");
 $server="localhost";
 $username="root";
 $password="root";
-$database="lista_mare_22";
+$database="login-app";
 
 $db = mysqli_connect($server,$username,$password,$database);
 
