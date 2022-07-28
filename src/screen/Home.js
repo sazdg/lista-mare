@@ -7,6 +7,8 @@ function Home() {
         <div className="homepage">
             <h1>HOMEPAGE</h1>
             <p>aggiungi categoria</p>
+            <p>footer</p>
+            <p>bug quando metti il filtro e poi clicchi usato</p>
         </div>
     );
 }
