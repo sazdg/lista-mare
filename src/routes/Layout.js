@@ -5,8 +5,8 @@ const Layout = () => {
     return (
             <nav>
                  <Link to="/" className="link">HOME</Link>
-                 <Link to="/accedi" className="link">ACCEDI</Link>
-                 <Link to="/dashboard" className="link">DASHBOARD</Link>
+                 <Link to="/accedi" className="link">ACCOUNT</Link>
+                 <Link to="/dashboard" className="link">CHECKLIST</Link>
             </nav>
     )
 };

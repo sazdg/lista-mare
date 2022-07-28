@@ -6,7 +6,7 @@ import Login from '../components/Login.js'
 function Accedi() {
     return (
         <div className="accedi">
-            <h1>LOGIN PAGE</h1>
+            <h1>PERSONAL ACCOUNT</h1>
             <Login />
         </div>
     );

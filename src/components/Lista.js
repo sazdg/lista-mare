@@ -2,8 +2,6 @@ import { Component } from 'react';
 import axios from 'axios';
 import '../App.css';
 import CheckLogin from './CheckLogin.js';
-import Aggiungi from './Aggiungi.js';
-import AggiungiCat from './AggiungiCat.js';
 
 
 class Lista extends Component {
@@ -179,25 +177,22 @@ class Lista extends Component {
             <div>
                 <h2>LISTA_MARE_22
                 <button type="button" className="aggiorna" style={{margin: '0 20px'}}onClick={() => this.LoadLista()}>AGGIORNA</button>
-                </h2><br/><br/>
-                
-                <div className="box">
-                   <Aggiungi stile="box-dx"/>
-                    <AggiungiCat stile="box-sx" /> 
-                </div>
+                </h2>
                 
                 <br />
 
                 <div className="boxCerca">
-                    <input type="text" className="cerca" placeholder="Cerca..." 
+                    <input type="text" className="cerca" placeholder="Cerca..." value={this.state.cerca}
                         onChange={(e) => this.setState({ cerca: e.target.value })}/>
                     <button type="button" className="cerca" onClick={() => this.Cerca()}>CERCA</button>
-                    <button type="button" className="cancel" onClick={() => this.setState({trovati: "hidden", risultatiCerca: [""]})}>X</button>
+                    <button type="button" className="cancel" onClick={() => this.setState({trovati: "hidden", risultatiCerca: [""], cerca: ""})}>X</button>
+                </div>
+
                     <div className="risultatiTrovati" style={{ visibility: this.state.trovati }}>
                         {this.state.risultatiCerca.map((object, index) => {
 
                             if(object === ""){
-                                return (<p>Nessun risultato...</p>)
+                                return (<p style={{padding: '0'}}>Nessun risultato...</p>)
                             } else {
                                 return (
                                 <li key={index} className={object.preso} >
@@ -212,16 +207,18 @@ class Lista extends Component {
                         })
                     }
                     </div>
-                </div>
+                
 
-                <div className="filtri">
-                    ORDER BY:  
-                    <button type="button" value="nome_item" className="btnFiltro" onClick={() => this.setState({ filtro: "nome_item"})}>A-Z</button>
-                    <button type="button" value="id_categoria" className="btnFiltro" onClick={() => this.setState({ filtro: "id_categoria"})}>CATEGORIE</button>
-                    <button type="button" value="preso" className="btnFiltro" onClick={() => this.setState({ filtro: "preso"})}>PRESO/NON</button>
-                    <button type="button" value="usato" className="btnFiltro" onClick={() => this.setState({ filtro: "usato"})}>USATO/NON</button>
-                </div>
+                <div className="boxList">
+                    <div className="filtri">
+                        ORDER BY:  
+                        <button type="button" value="nome_item" className="btnFiltro" onClick={() => this.setState({ filtro: "nome_item"})}>A-Z</button>
+                        <button type="button" value="id_categoria" className="btnFiltro" onClick={() => this.setState({ filtro: "id_categoria"})}>CATEGORIE</button>
+                        <button type="button" value="preso" className="btnFiltro" onClick={() => this.setState({ filtro: "preso"})}>PRESO/NON</button>
+                        <button type="button" value="usato" className="btnFiltro" onClick={() => this.setState({ filtro: "usato"})}>USATO/NON</button>
+                    </div>
 
+                
                     {
                     this.state.risultati.map((object, index) => {
                        
@@ -233,7 +230,9 @@ class Lista extends Component {
                         </li>)
                 
 
-                        })}
+                    })}
+                </div>
+                    
                 
             </div>
         );

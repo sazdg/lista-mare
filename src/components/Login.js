@@ -104,7 +104,9 @@ class Login extends Component {
                         </p>
                     <p style={{ visibility: 'visible'}}>
                         
-                            <Link to="/dashboard"><button type="button" className="btnGoto">GO TO DASHBOARD</button></Link>
+                        <Link to="/dashboard"><button type="button" className="btnGoto">GO TO CHECKLIST</button></Link>
+                        <br/>
+                        <Link to="/aggiungicose"><button type="button" className="btnGoto">GO TO AGGIUNGI COSE</button></Link>
                             
                     </p>
                         <button type="button" className='cancel' onClick={() => this.deleteSession()}>LOGOUT</button>
