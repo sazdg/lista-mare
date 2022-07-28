@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import axios from 'axios';
 import '../App.css';
-import { ReactSession } from 'react-client-session';
 
 
 class Aggiungi extends Component {
@@ -68,7 +67,10 @@ class Aggiungi extends Component {
     }
 
     render() {
-        if (ReactSession.get("username") === "" || ReactSession.get("username") == null) {
+        var usernameEsiste = sessionStorage.getItem("username")
+        var utenteLoggato = sessionStorage.getItem("isUserLogged")
+
+        if (usernameEsiste == null || utenteLoggato == null) {
 
             return false;
 

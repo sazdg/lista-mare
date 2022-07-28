@@ -1,8 +1,16 @@
+html, body {
+  height: 100%;
+}
+
 footer {
   background-color: rgb(92, 127, 254);
   text-align: center;
   padding: 20px;
   color: #fff;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
 .link {
@@ -41,7 +49,7 @@ li {
   list-style-type: circle;
 }
 
-button.preso, button.nonpreso, button.usato, button.nonusato, button.cancella, button.aggiungi, button.aggiorna, button.cerca, button.btnFiltro{
+button.preso, button.nonpreso, button.usato, button.nonusato, button.cancella, button.aggiungi, button.aggiorna, button.cerca, button.btnFiltro, input.faiLogin {
   width: 6rem;
   padding: 8px;
   margin: 4px;
@@ -102,7 +110,7 @@ button.cancella:hover, button.cancel:hover {
   background-color: rgb(255, 223, 223);
   box-shadow: 1px 2px;
 }
-button.preso:hover, button.nonpreso:hover, button.usato:hover, button.nonusato:hover{
+button.preso:hover, button.nonpreso:hover, button.usato:hover, button.nonusato:hover {
   border: 1px solid black;
   box-shadow: 1px 2px;
 }
@@ -138,13 +146,13 @@ span.inputAggiungi, input[type="checkbox"] {
   border-bottom: 2px dotted #000;
 }
 
-.btnFiltro {
+.btnFiltro, .faiLogin {
   background-color: #fff;
   border-radius: 10px;
   border: 1px solid #000;
   color: #000;
 }
-.btnFiltro:hover {
+.btnFiltro:hover, .faiLogin:hover {
   background-color: rgb(198, 198, 198);
   box-shadow: 1px 2px;
 }

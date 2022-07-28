@@ -1,8 +1,7 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import '../App.css';
 import { Link } from 'react-router-dom';
-import { ReactSession } from 'react-client-session';
 
 
 class Login extends Component {
@@ -19,6 +18,7 @@ class Login extends Component {
         };
     }
 
+
     //form submit handler method
     tryLogin(event){
         event.preventDefault();
@@ -31,16 +31,10 @@ class Login extends Component {
         })
         .then(response => {
             if (response.data.login) {
-                let element = <Link to="/dashboard" className="goto">Go to Dashboard</Link>
-                
-               this.setState({
-                message: element,
-                visible: "visible",
-                color: "#90e991"
-               })
 
-               ReactSession.setStoreType("localStorage")
-               ReactSession.set("username",response.data.utente)
+               sessionStorage.setItem("username", response.data.utente)
+               sessionStorage.setItem("isUserLogged", true)
+               this.forceUpdate()
                
             } else {
                 this.setState({
@@ -53,28 +47,29 @@ class Login extends Component {
             .catch(error => this.setState({ message: error.message}));
     }
 
-/*
-    tryLogin(event) {
-        console.log("click trylogin")
-        event.preventDefault()
-        
-        axios.post("http://localhost/lista-mare/api/login.php", this.state)
-            .then((response) => {
-                console.log(response.data)
-            })
-            .catch(error => {
-                alert(error.message)
-            })
-
-    }
-*/
     //how to send data from react to php api
     //install axios using npm, it works well with http requests
 
+    deleteSession(){
+        sessionStorage.removeItem("username")
+        sessionStorage.removeItem("isUserLogged")
+
+        this.setState({
+            username: "",
+            password: ""
+        })
+        
+        this.forceUpdate()
+    }
 
     render() {
 
-        return (
+        var usernameEsiste = sessionStorage.getItem("username")
+        var utenteLoggato = sessionStorage.getItem("isUserLogged")
+        
+        if (usernameEsiste === null && utenteLoggato === null) {
+
+            return (
 
             <div>
                 <form action="#">
@@ -90,7 +85,7 @@ class Login extends Component {
                         onChange={(e) => this.setState({ password: e.target.value })}
                         required />
                     <br />
-                    <input type="submit" id="send" value="Send it!!"
+                    <input type="submit" id="send" value="Login" className="faiLogin"
                         onClick={(e) => this.tryLogin(e)} />
                     
                 </form>
@@ -99,6 +94,27 @@ class Login extends Component {
 
             </div>
         );
+
+        } else {
+
+            return(
+                    <div>
+                        <p>
+                            utente: {sessionStorage.getItem("username")}
+                        </p>
+                    <p className="error" style={{ visibility: 'visible'}}
+                    >
+                        <button type="button" className="cancel">
+                            <Link to="/dashboard">GO TO DASHBOARD</Link>
+                            </button>
+                    </p>
+                        <button type="button" className='cancel' onClick={() => this.deleteSession()}>LOGOUT</button>
+                    <br/><br/>
+                    </div>
+                    
+            );
+        
+        }
     }
 }
 export default Login;
