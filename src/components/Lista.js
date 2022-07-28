@@ -184,12 +184,12 @@ class Lista extends Component {
                     <input type="text" className="cerca" placeholder="Cerca..." 
                         onChange={(e) => this.setState({ cerca: e.target.value })}/>
                     <button type="button" className="cerca" onClick={() => this.Cerca()}>CERCA</button>
-                    <button type="button" className="cancel" onClick={() => this.setState({trovati: "hidden"})}>X</button>
+                    <button type="button" className="cancel" onClick={() => this.setState({trovati: "hidden", risultatiCerca: [""]})}>X</button>
                     <div className="risultatiTrovati" style={{ visibility: this.state.trovati }}>
                         {this.state.risultatiCerca.map((object, index) => {
 
                             if(object === ""){
-                                return (<p>Nothing...</p>)
+                                return (<p>Nessun risultato...</p>)
                             } else {
                                 return (
                                 <li key={index} className={object.preso} >
