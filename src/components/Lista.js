@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import axios from 'axios';
 import '../App.css';
-import { ReactSession } from 'react-client-session';
 import CheckLogin from './CheckLogin.js';
 import Aggiungi from './Aggiungi.js';
 
@@ -27,7 +26,7 @@ class Lista extends Component {
 
     
     componentDidMount(){
-        this.LoadLista()
+        this.LoadLista(this.state.filtro)
     }
 
     componentDidUpdate(_, prevState){
@@ -161,7 +160,12 @@ class Lista extends Component {
     render() {
         
 
-    if (ReactSession.get("username") === "" || ReactSession.get("username") == null) {
+    var usernameEsiste = sessionStorage.getItem("username")
+    var utenteLoggato = sessionStorage.getItem("isUserLogged")
+        
+
+    if (usernameEsiste == null || utenteLoggato == null) {
+
         return(
             <CheckLogin />
         );
@@ -169,8 +173,6 @@ class Lista extends Component {
     } else {
         return (
             <div>
-
-                <span>{this.state.log}</span>
 
                 <button type="button" className="aggiorna" onClick={() => this.LoadLista()}>AGGIORNA</button>
                 <br/><br/>
@@ -182,12 +184,12 @@ class Lista extends Component {
                     <input type="text" className="cerca" placeholder="Cerca..." 
                         onChange={(e) => this.setState({ cerca: e.target.value })}/>
                     <button type="button" className="cerca" onClick={() => this.Cerca()}>CERCA</button>
-                    <button type="button" className="cancel" onClick={() => this.setState({trovati: "hidden"})}>X</button>
+                    <button type="button" className="cancel" onClick={() => this.setState({trovati: "hidden", risultatiCerca: [""]})}>X</button>
                     <div className="risultatiTrovati" style={{ visibility: this.state.trovati }}>
                         {this.state.risultatiCerca.map((object, index) => {
 
                             if(object === ""){
-                                return (<p>Nothing...</p>)
+                                return (<p>Nessun risultato...</p>)
                             } else {
                                 return (
                                 <li key={index} className={object.preso} >

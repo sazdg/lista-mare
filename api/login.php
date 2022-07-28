@@ -33,7 +33,7 @@ if(isset($request) && !empty($request)){
     
         
     } else {
-        echo json_encode(["login" => false, "message" => "Credenziali sbagliate" . $username]);
+        echo json_encode(["login" => false, "message" => "Credenziali sbagliate " . $username]);
     }
 
 } else {
