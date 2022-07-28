@@ -48,7 +48,6 @@ class Lista extends Component {
 
         axios.get('http://localhost/lista-mare/api/itemLista.php?filtro=' + this.state.filtro)
             .then(response => {
-                console.log(response.data)
                 
 
                 if (response.data.return) {
@@ -79,7 +78,6 @@ class Lista extends Component {
             .then(response => {
 
                 if (response.data.return) {
-                    console.log(response.data)
                     this.LoadLista(this.state.filtro)
                     this.Cerca()
                 } else {
@@ -93,7 +91,6 @@ class Lista extends Component {
             .then(response => {
 
                 if (response.data.return) {
-                    console.log(response.data)
                     this.LoadLista(this.state.filtro)
                     this.Cerca()
                 } else {
@@ -111,7 +108,6 @@ class Lista extends Component {
             .then(response => {
 
                 if (response.data.return) {
-                    console.log(response.data)
                     this.LoadLista(this.state.filtro)
                     this.Cerca()
                 } else {
@@ -124,7 +120,6 @@ class Lista extends Component {
     }
 
     Cerca() {
-        console.log(this.state.cerca + " da cercare")
         axios.get('http://localhost/lista-mare/api/itemCerca.php?nome=' + this.state.cerca)
             .then(response => {
 
@@ -132,7 +127,6 @@ class Lista extends Component {
                     this.setState({
                         trovati: "visible"
                     })
-                    console.log(response.data.trovati)
 
                     var ris = []
 
