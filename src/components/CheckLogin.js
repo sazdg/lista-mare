@@ -19,7 +19,7 @@ class CheckLogin extends Component {
         var usernameEsiste = sessionStorage.getItem("username")
         var utenteLoggato = sessionStorage.getItem("isUserLogged")
         
-        if (usernameEsiste == null || utenteLoggato == null) {
+        if (usernameEsiste === null && utenteLoggato === null) {
 
                 let element = <Link to="/accedi" className="goto">Fai il login per vedere la pagina</Link>
                 this.setState({

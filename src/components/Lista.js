@@ -164,7 +164,7 @@ class Lista extends Component {
     var utenteLoggato = sessionStorage.getItem("isUserLogged")
         
 
-    if (usernameEsiste == null || utenteLoggato == null) {
+        if (usernameEsiste === null && utenteLoggato === null) {
 
         return(
             <CheckLogin />

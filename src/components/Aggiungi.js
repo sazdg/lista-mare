@@ -70,7 +70,7 @@ class Aggiungi extends Component {
         var usernameEsiste = sessionStorage.getItem("username")
         var utenteLoggato = sessionStorage.getItem("isUserLogged")
 
-        if (usernameEsiste == null || utenteLoggato == null) {
+        if (usernameEsiste === null && utenteLoggato === null) {
 
             return false;
 
