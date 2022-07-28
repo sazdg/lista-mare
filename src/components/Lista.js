@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../App.css';
 import CheckLogin from './CheckLogin.js';
 import Aggiungi from './Aggiungi.js';
+import AggiungiCat from './AggiungiCat.js';
 
 
 class Lista extends Component {
@@ -167,17 +168,24 @@ class Lista extends Component {
         if (usernameEsiste === null && utenteLoggato === null) {
 
         return(
-            <CheckLogin />
+            <div>
+                <h1>LA TUA LISTA</h1>
+                <CheckLogin />
+            </div>
         );
 
     } else {
         return (
             <div>
-
-                <button type="button" className="aggiorna" onClick={() => this.LoadLista()}>AGGIORNA</button>
-                <br/><br/>
+                <h2>LISTA_MARE_22
+                <button type="button" className="aggiorna" style={{margin: '0 20px'}}onClick={() => this.LoadLista()}>AGGIORNA</button>
+                </h2><br/><br/>
                 
-                <Aggiungi />
+                <div className="box">
+                   <Aggiungi stile="box-dx"/>
+                    <AggiungiCat stile="box-sx" /> 
+                </div>
+                
                 <br />
 
                 <div className="boxCerca">

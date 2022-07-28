@@ -120,13 +120,6 @@ button.preso:hover, button.nonpreso:hover, button.usato:hover, button.nonusato:h
   box-shadow: 1px 2px;
 }
 
-.styleAggiungi {
-  margin: auto;
-  padding: 20px 5px;
-  border-top: 2px dotted #000;
-  border-bottom: 2px dotted #000;
-}
-
 input.inputAggiungi, input.cerca {
   padding: 5px;
   margin: 10px 0;
@@ -160,4 +153,28 @@ span.inputAggiungi, input[type="checkbox"] {
 .btnFiltro:hover, .faiLogin:hover {
   background-color: rgb(198, 198, 198);
   box-shadow: 1px 2px;
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.box-dx, .box-sx {
+  margin: 10px 0;
+  padding: 20px 50px;
+  border: 4px dotted rgb(92, 127, 254);
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 3px;
+  align-self: auto;
+}
+.box-dx {
+  order: 1;
+}
+
+.box-sx {
+  order: 2;
 }

@@ -12,6 +12,8 @@ class Aggiungi extends Component {
             categoria: "",
             preso: "nonpreso",
             usato: "nonusato",
+            check1: false,
+            check2: false
         }
 
         const cat = []
@@ -23,17 +25,29 @@ class Aggiungi extends Component {
 
     CbxPreso() {
         if (this.state.preso === "nonpreso"){
-            this.setState({ preso: "preso"})
+            this.setState({ 
+                preso: "preso",
+                check1: true
+            })
         } else {
-            this.setState({ preso: "nonpreso"})
+            this.setState({ 
+                preso: "nonpreso",
+                check1: false
+            })
         }
     }
 
     CbxUsato() {
         if (this.state.usato === "nonusato") {
-            this.setState({ usato: "usato" })
+            this.setState({ 
+                usato: "usato",
+                check2: true
+            })
         } else {
-            this.setState({ usato: "nonusato"})
+            this.setState({ 
+                usato: "nonusato",
+                check2: false
+            })
         }
     }
 
@@ -42,7 +56,13 @@ class Aggiungi extends Component {
             .then(response => {
 
                 if (response.data.return) {
-                    console.log("aggiunto")
+                    console.log("Aggiunto item")
+                    this.setState({
+                        nome: "",
+                        categoria: ""
+                    })
+                    this.CbxPreso()
+                    this.CbxUsato()
                 } else {
                     console.log(response.data)
                 }
@@ -79,7 +99,7 @@ class Aggiungi extends Component {
 
                 <div>
                     
-                    <form action="#" className="styleAggiungi">
+                    <form action="#" className={this.props.stile}>
                         <span style={{fontWeight: 'bold'}}>AGGIUNGI UN ITEM</span><br/>
                         <label>Nome</label><br />
                         <input type="text" id="nome" name="nome"
@@ -111,9 +131,9 @@ class Aggiungi extends Component {
 
                         <br />
                         <span className="inputAggiungi"><input type="checkbox" value={this.state.preso} 
-                            onClick={() => this.CbxPreso()} /> PRESO</span><br/>
+                            onClick={() => this.CbxPreso()} checked={this.state.check1}/> PRESO</span><br/>
                         <span className="inputAggiungi"><input type="checkbox" value={this.state.usato} 
-                            onClick={() => this.CbxUsato()} /> USATO</span>
+                            onClick={() => this.CbxUsato()} checked={this.state.check2}/> USATO</span>
                         <br/>
                         <button type="button" className="aggiungi"
                             onClick={() => this.itemAggiungi()}>AGGIUNGI</button>
